@@ -1,0 +1,52 @@
+name: Documentation Quality
+
+on:
+  pull_request:
+    paths:
+      - "**/*.md"
+      - ".vale.ini"
+      - ".markdownlint.json"
+  push:
+    paths:
+      - "**/*.md"
+      - ".vale.ini"
+      - ".markdownlint.json"
+
+jobs:
+  doclint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Markdownlint
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+      - name: Run markdownlint
+        run: markdownlint "**/*.md" --ignore node_modules
+
+      # Codespell
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install codespell
+        run: pip install codespell
+      - name: Run codespell
+        run: |
+          codespell \
+            --ignore-words-list="crate,fo,ba,teh" \
+            --skip="./node_modules,./.git,./styles" \
+            --quiet-level=2
+
+      # Vale
+      - name: Install Vale
+        run: |
+          curl -fsSL https://install.goreleaser.com/github.com/errata-ai/vale.sh | sh
+          sudo mv ./bin/vale /usr/local/bin/vale
+      - name: Run Vale
+        run: vale .
