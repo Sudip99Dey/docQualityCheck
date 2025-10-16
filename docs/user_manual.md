@@ -25,3 +25,4 @@ Term: definition
 
 ## 7. Changelog
 v1.0 — initial draft
+
