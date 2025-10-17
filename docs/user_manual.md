@@ -1,4 +1,3 @@
-cat > docs/user_manual.md << 'EOF'
 # MyApp User Manual v1.0
 
 ## 1. Overview
@@ -35,4 +34,3 @@ Term: short, consistent definition
 ## 7. Changelog
 
 v1.0 — initial draft
-EOF

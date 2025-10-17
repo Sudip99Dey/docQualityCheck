@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # Documentation Quality Labs (Lab 1–3)
 
 ## Quick Links
@@ -20,6 +19,3 @@ cat > README.md << 'EOF'
 
 - Co-editing tool: HackMD/Google Docs
 - Final plan exported & pushed
-EOF
-# ensure single trailing newline
-printf "\n" >> README.md
