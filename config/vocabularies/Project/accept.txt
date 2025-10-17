@@ -1,6 +1,0 @@
-markdownlint
-codespell
-Repo
-Mitigations
-PRs
-MyApp
