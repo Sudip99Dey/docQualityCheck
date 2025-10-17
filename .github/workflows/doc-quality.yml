@@ -41,3 +41,7 @@ jobs:
         uses: errata-ai/vale-action@v2
         with:
           files: .
+          vale_flags: "--config=.vale.ini"
+          reporter: github-check
+          fail_on_error: false
+          filter_mode: nofilter
