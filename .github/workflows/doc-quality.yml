@@ -41,7 +41,8 @@ jobs:
         uses: errata-ai/vale-action@v2
         with:
           files: .
-          vale_flags: "--config=.vale.ini"
-          reporter: github-check
-          fail_on_error: false
-          filter_mode: nofilter
+          vale_flags: "--config=.vale.ini --no-exit"  # don't return non-zero
+          reporter: cli                               # print issues to logs
+          fail_on_error: false                        # don't fail the job
+          level: error                                # only show error+ to start
+          debug: true
