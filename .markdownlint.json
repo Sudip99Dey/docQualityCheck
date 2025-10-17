@@ -1,6 +1,6 @@
 {
   "default": true,
-  "MD012": false,  // no-multiple-blanks (disabled to unblock)
-  "MD013": false,  // long lines
-  "MD033": false   // inline HTML
+  "MD012": false,  
+  "MD013": false,  
+  "MD033": false   
 }
