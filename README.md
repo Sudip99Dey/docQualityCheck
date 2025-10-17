@@ -25,7 +25,7 @@
 
 ## Lab 3 — Real-time collaboration
 
-- Co-editing tool: <HackMD> https://hackmd.io/@CI5B8KEsRIaCu2FP16lIVw/Hk2o4wyAxg/edit
+- Co-editing tool: [Collaboration doc (HackMD)](https://hackmd.io/@CI5B8KEsRIaCu2FP16lIVw/Hk2o4wyAxg/edit)
 - Final plan: `docs/test_plan.md`
 - Observations: `docs/collab_observations.md`
 - Notes:
