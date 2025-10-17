@@ -36,13 +36,13 @@ jobs:
             --skip="./node_modules,./.git,./styles" \
             --quiet-level=2
 
-      # ---------- Vale (official action) ----------
+      # ---------- Vale (style & grammar) ----------
       - name: Vale (style & grammar)
         uses: errata-ai/vale-action@v2
         with:
           files: .
-          vale_flags: "--config=.vale.ini --no-exit"  # don't return non-zero
-          reporter: cli                               # print issues to logs
-          fail_on_error: false                        # don't fail the job
-          level: error                                # only show error+ to start
-          debug: true
+          vale_flags: "--config=.vale.ini --no-exit"  # don't fail even if issues
+          reporter: github-check                      # ✅ supported by reviewdog
+          fail_on_error: false
+          level: error                                # show only errors for now
+          filter_mode: nofilter
