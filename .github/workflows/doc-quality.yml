@@ -20,6 +20,7 @@ on:
 jobs:
   doclint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -68,9 +69,25 @@ jobs:
           VALE_PATH="$(find "$RUNNER_TEMP/vale_extract" -type f -name 'vale' | head -n1)"
           sudo install -m 755 "$VALE_PATH" /usr/local/bin/vale
           vale --version
-          # Sync Google style package so config works
-          vale sync
 
-      # ---------- Vale (CLI, non-blocking) ----------
-      - name: Run Vale (non-blocking)
-        run: vale --config=.vale.ini --no-exit .
+      # ---------- Vale (use a temp config with NO vocab) ----------
+      - name: Run Vale (non-blocking with temp config)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p styles
+          cat > .vale.ci.ini <<'EOF'
+          StylesPath = styles
+          MinAlertLevel = warning
+          Packages = Google
+
+          [*.md]
+          BasedOnStyles = Google
+          Google.Headings = NO
+          EOF
+
+          # Pull Google style package for this config
+          vale sync --config=.vale.ci.ini
+
+          # Run without failing the job
+          vale --config=.vale.ci.ini --no-exit .
