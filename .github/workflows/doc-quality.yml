@@ -43,18 +43,8 @@ jobs:
             --skip="./node_modules,./.git,./styles" \
             --quiet-level=2
 
-      # ---------- Vale (install latest release) ----------
-      - name: Install Vale
-        shell: bash
-        run: |
-          set -euo pipefail
-          url=$(curl -s https://api.github.com/repos/errata-ai/vale/releases/latest \
-            | grep browser_download_url \
-            | grep Linux_64-bit.tar.gz \
-            | cut -d '"' -f 4)
-          curl -L "$url" -o vale.tar.gz
-          tar -xzf vale.tar.gz
-          sudo mv vale*/vale /usr/local/bin/vale
-          vale -v
-      - name: Run Vale
-        run: vale .
+      # ---------- Vale (official action) ----------
+      - name: Vale (style & grammar)
+        uses: errata-ai/vale-action@v2
+        with:
+          files: .
